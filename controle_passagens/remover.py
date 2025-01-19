@@ -1,12 +1,15 @@
 import sqlite3
 import os
 from prettytable import PrettyTable
+from pathlib import Path
 
 
 def remover_cliente(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db") 
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_cliente = input('Qual a identificação do Cliente a ser REMOVIDO?: ')
         
@@ -29,8 +32,10 @@ def remover_cliente():
 
 def remover_voo(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db") 
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_voo = input('Qual a identificação do Voo a ser REMOVIDO?: ')
         
@@ -53,8 +58,10 @@ def remover_voo():
             
 def remover_aeroporto(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db") 
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_aeroporto = input('Qual a identificação do Aeroporto a ser REMOVIDO?: ')
         

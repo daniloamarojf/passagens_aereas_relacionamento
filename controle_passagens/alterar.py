@@ -1,12 +1,15 @@
 import sqlite3
 import os
 from prettytable import PrettyTable
+from pathlib import Path
 
 
 def alterar_cliente(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_cliente = input('Qual a identificação do Cliente a ser ALTERADO?: ')
         
@@ -42,14 +45,16 @@ def alterar_cliente():
         input(f'Cliente com ID {id_cliente} não encontardo. Pressione enter!')
         
         
-'''def alterar_voo(): 
+def alterar_voo(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_voo = input('Qual a identificação do Voo a ser ALTERADO?: ')
         
-    cursor.execute('SELECT numero_voo FROM voo WHERE id_voo = ?', (id_voo))
+    cursor.execute('SELECT nome FROM voo WHERE id_voo = ?', (id_voo))
     voo = cursor.fetchone()
         
     if voo:
@@ -63,12 +68,12 @@ def alterar_cliente():
             novo_destino = input('Destino:')
             nova_data_partida = input('Data de partida: ')
             nova_data_chegada = input('Data de chegada: ')
-            nova_duracao = input('Duração: ')
+            novo_preco = input('Preco: ')
             
         
-            dados_voo = (novo_numero_voo, nova_origem, novo_destino, nova_data_partida, nova_data_chegada, nova_duracao, id_voo)
+            dados_voo = (novo_numero_voo, nova_origem, novo_destino, nova_data_partida, nova_data_chegada, novo_preco, id_voo)
         
-            cursor.execute('UPDATE voo SET numero_voo = ?, origem = ?, destino = ?, data_partida = ?, data_chegada = ?, duracao = ? WHERE id_voo = ?',
+            cursor.execute('UPDATE voo SET numero_voo = ?, origem = ?, chegada = ?, data_partida = ?, data_chegada = ?, preco = ? WHERE id_voo = ?',
                 (dados_voo))
         
             conn.commit()
@@ -85,18 +90,20 @@ def alterar_cliente():
         
 def alterar_aeroporto(): 
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
         
     id_aeroporto = input('Qual a identificação do aeroporto a ser ALTERADO?: ')
         
-    cursor.execute('SELECT nome_aeroporto FROM aeroporto WHERE id_aeroporto = ?', (id_aeroporto))
+    cursor.execute('SELECT nome FROM aeroporto WHERE id_aeroporto = ?', (id_aeroporto))
     aeroporto = cursor.fetchone()
         
     if aeroporto:
         print()
         nome_aeroporto2 = aeroporto[0]
-        opcao_alterar = input(f'Deseja realmente alter o Aeroporto: {nome_aeroporto2} ? (1 - Sim/ 2 - Não): ')
+        opcao_alterar = input(f'Deseja realmente alter o cliente: {nome_aeroporto2} ? (1 - Sim/ 2 - Não): ')
         
         if opcao_alterar == '1':
             novo_nome_aeroporto = input('Nome do Aeroporto: ')
@@ -121,4 +128,3 @@ def alterar_aeroporto():
         
     else:
         input(f'Aeroporto com ID {id_aeroporto} não encontardo. Pressione enter!')
-'''

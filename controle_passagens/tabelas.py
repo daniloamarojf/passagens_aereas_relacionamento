@@ -1,11 +1,14 @@
 import sqlite3
 import os
+from pathlib import Path
 from prettytable import PrettyTable
 
 
 def criar_clientes():
     
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea_relacionamento\Banco_dados.db")
+    
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -22,19 +25,18 @@ def criar_clientes():
 
 def criar_voo():
     
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea_relacionamento\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS voo (
             id_voo INTEGER PRIMARY KEY AUTOINCREMENT,
-            numero_voo VARCHAR(10) UNIQUE NOT NULL,
             origem INT NOT NULL,
             destino INT NOT NULL,
             data_partida TIMESTAMP NOT NULL,
             data_chegada TIMESTAMP NOT NULL,
-            preco INTEGER,
-            duracao INTEGER
+            preco INTEGER
         )
     ''')
     conn.commit()
@@ -42,9 +44,10 @@ def criar_voo():
 
 def criar_aeroporto():
     
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea_relacionamento\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-
+    
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS aeroporto (
             id_aeroporto INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,5 +61,5 @@ def criar_aeroporto():
     conn.close()
     
 criar_clientes()
-criar_voo()
 criar_aeroporto()
+criar_voo()

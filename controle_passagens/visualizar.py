@@ -1,12 +1,15 @@
 import sqlite3
 import os
 from prettytable import PrettyTable
+from pathlib import Path
 
 
 def visualizar_cliente():
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
     
     print('1 - Visualizar Cliente')
     print('2 - Visualizar todos os Clientes')
@@ -52,10 +55,12 @@ def visualizar_cliente():
         input('Opção inválida. Pressione enter!')    
     
    
-'''def visualizar_voo():
+def visualizar_voo():
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
     
     print('1 - Visualizar Voo')
     print('2 - Visualizar todos os Voos')
@@ -102,8 +107,10 @@ def visualizar_cliente():
    
 def visualizar_aeroporto():
         
-    conn = sqlite3.connect("C:\Repositorios\Passagens_aerea\Banco_dados.db")
+    db_path = Path("C:/Repositorios/passagens_aereas_relacionamento/Banco_dados.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+
     
     print('1 - Visualizar Aeroporto')
     print('2 - Visualizar todos os Aeroportos')
@@ -148,4 +155,4 @@ def visualizar_aeroporto():
     else:
         input('Opção inválida. Pressione enter!')    
    
-   '''
+   
