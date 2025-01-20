@@ -86,4 +86,4 @@ while True:
             input('Opção inválida! Pressione enter.') 
 
     else:
-        print('FIM')
+        input('Opção de Tabela inválida. Pressione Entre ...')
