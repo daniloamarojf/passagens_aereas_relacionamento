@@ -54,16 +54,15 @@ def alterar_voo():
         
     id_voo = input('Qual a identificação do Voo a ser ALTERADO?: ')
         
-    cursor.execute('SELECT nome FROM voo WHERE id_voo = ?', (id_voo))
+    cursor.execute('SELECT id_voo FROM voo WHERE id_voo = ?', (id_voo))
     voo = cursor.fetchone()
         
     if voo:
         print()
-        numero_voo2 = voo[0]
-        opcao_alterar = input(f'Deseja realmente alter o cliente: {numero_voo2} ? (1 - Sim/ 2 - Não): ')
+        origem = voo[0]
+        opcao_alterar = input(f'Deseja realmente alterar o voo de origem: {origem} ? (1 - Sim/ 2 - Não): ')
         
         if opcao_alterar == '1':
-            novo_numero_voo = input('Numero do Voo: ')
             nova_origem = input('Origem: ')
             novo_destino = input('Destino:')
             nova_data_partida = input('Data de partida: ')
@@ -71,9 +70,9 @@ def alterar_voo():
             novo_preco = input('Preco: ')
             
         
-            dados_voo = (novo_numero_voo, nova_origem, novo_destino, nova_data_partida, nova_data_chegada, novo_preco, id_voo)
+            dados_voo = (nova_origem, novo_destino, nova_data_partida, nova_data_chegada, novo_preco, id_voo)
         
-            cursor.execute('UPDATE voo SET numero_voo = ?, origem = ?, chegada = ?, data_partida = ?, data_chegada = ?, preco = ? WHERE id_voo = ?',
+            cursor.execute('UPDATE voo SET origem = ?, destino = ?, data_partida = ?, data_chegada = ?, preco = ? WHERE id_voo = ?',
                 (dados_voo))
         
             conn.commit()
