@@ -69,7 +69,22 @@ def visualizar_voo():
     if opcao_visualizar == '1':    
         id_voo = input('Qual a identificação do Voo que deseja visualizar? ')    
             
-        cursor.execute('SELECT * FROM voo WHERE id_voo = ?', (id_voo,))   # pORQUE ESSA VÍRGULA?
+        cursor.execute('''
+            SELECT id_voo,
+                    a_origem.nome_aeroporto AS origem,
+                    a_estino.nome_aeroporto AS destino,
+                    v_data_partida,
+                    v_data_chegada,
+                    v_preco 
+            FROM voo 
+            JOIN aeroporto a_origem ON v_origem = a_origem.id_aeroporto
+            JOIN aeroporto a_destino ON v_destino = a_destino.id_aeroporto
+            WHERE id_voo = ?
+        ''', (id_voo,))
+        
+        
+        
+        
         resultados = cursor.fetchall()
             
         tabela = PrettyTable()
@@ -84,8 +99,29 @@ def visualizar_voo():
         print(tabela)
         input('Pressione Enter')
         conn.close()
+        
     elif opcao_visualizar == '2':
-        cursor.execute('SELECT * FROM voo')
+    
+        cursor.execute('''
+            SELECT v.id_voo, 
+                   a_origem.nome_aeroporto AS origem, 
+                   a_destino.nome_aeroporto AS destino,
+                   v_data_partida, 
+                   v_ata_chegada, 
+                   v_preco
+            FROM voo v
+            JOIN aeroporto a_origem ON v.origem = a_origem.id_aeroporto
+            JOIN aeroporto a_destino ON v.destino = a_destino.id_aeroporto
+        ''')
+        
+        
+        
+        
+        
+        
+        
+        
+        
         resultados = cursor.fetchall()
             
         tabela = PrettyTable()

@@ -36,7 +36,9 @@ def criar_voo():
             destino INT NOT NULL,
             data_partida TIMESTAMP NOT NULL,
             data_chegada TIMESTAMP NOT NULL,
-            preco INTEGER
+            preco INTEGER,
+            FOREIGN KEY (origem) REFERENCES aeroporto(id_aeroporto),
+            FOREIGN KEY (destino) REFERENCES aeroporto(id_aeroporto)
         )
     ''')
     conn.commit()
@@ -60,3 +62,6 @@ def criar_aeroporto():
     conn.commit()
     conn.close()
     
+criar_clientes()
+criar_aeroporto()
+criar_voo()

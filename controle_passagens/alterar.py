@@ -53,14 +53,27 @@ def alterar_voo():
 
         
     id_voo = input('Qual a identificação do Voo a ser ALTERADO?: ')
-        
+    
+    cursor.execute('SELECT * FROM aeroporto')
+    resultado = cursor.fetchall()
+    
+    if not resultado:
+        print('Nenhum Aeroporto encontrado. Cadastre Aeroportos primeiro.')
+        # conn.close()
+        return
+    
+    tabela = PrettyTable(['id_aeroporto', 'nome_aeroporto', 'codigo_iata', 'cidade', 'pais'])
+    for linha in resultado:
+        tabela.add_row(linha)
+    print(tabela)    
+    
     cursor.execute('SELECT id_voo FROM voo WHERE id_voo = ?', (id_voo))
     voo = cursor.fetchone()
         
     if voo:
         print()
         origem = voo[0]
-        opcao_alterar = input(f'Deseja realmente alterar o voo de origem: {origem} ? (1 - Sim/ 2 - Não): ')
+        opcao_alterar = input(f'Deseja realmente alterar este voo ?: (1 - Sim/ 2 - Não): ')
         
         if opcao_alterar == '1':
             nova_origem = input('Origem: ')
@@ -96,7 +109,7 @@ def alterar_aeroporto():
         
     id_aeroporto = input('Qual a identificação do aeroporto a ser ALTERADO?: ')
         
-    cursor.execute('SELECT nome FROM aeroporto WHERE id_aeroporto = ?', (id_aeroporto))
+    cursor.execute('SELECT id_aeroporto FROM aeroporto WHERE id_aeroporto = ?', (id_aeroporto))
     aeroporto = cursor.fetchone()
         
     if aeroporto:
@@ -127,3 +140,5 @@ def alterar_aeroporto():
         
     else:
         input(f'Aeroporto com ID {id_aeroporto} não encontardo. Pressione enter!')
+        
+

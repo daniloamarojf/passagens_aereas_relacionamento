@@ -39,7 +39,7 @@ def remover_voo():
         
     id_voo = input('Qual a identificação do Voo a ser REMOVIDO?: ')
         
-    cursor.execute('SELECT numero_voo FROM voo WHERE id_voo = ?', (id_voo))
+    cursor.execute('SELECT id_voo FROM voo WHERE id_voo = ?', (id_voo))
     voo = cursor.fetchone()
         
     if voo:
