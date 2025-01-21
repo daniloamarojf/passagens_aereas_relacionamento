@@ -6,7 +6,7 @@ from pathlib import Path
 
 def alterar_cliente(): 
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -47,7 +47,7 @@ def alterar_cliente():
         
 def alterar_voo(): 
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -102,7 +102,7 @@ def alterar_voo():
         
 def alterar_aeroporto(): 
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 

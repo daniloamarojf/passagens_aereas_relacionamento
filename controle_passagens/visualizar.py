@@ -6,7 +6,7 @@ from pathlib import Path
 
 def visualizar_cliente():
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -57,7 +57,7 @@ def visualizar_cliente():
    
 def visualizar_voo():
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -70,15 +70,15 @@ def visualizar_voo():
         id_voo = input('Qual a identificação do Voo que deseja visualizar? ')    
             
         cursor.execute('''
-            SELECT id_voo,
-                    a_origem.nome_aeroporto AS origem,
-                    a_estino.nome_aeroporto AS destino,
-                    v_data_partida,
-                    v_data_chegada,
-                    v_preco 
+            SELECT voo.id_voo,
+                    aeroporto_origem.nome_aeroporto AS origem,
+                    aeroporto_destino.nome_aeroporto AS destino,
+                    voo.data_partida,
+                    voo.data_chegada,
+                    voo.preco 
             FROM voo 
-            JOIN aeroporto a_origem ON v_origem = a_origem.id_aeroporto
-            JOIN aeroporto a_destino ON v_destino = a_destino.id_aeroporto
+            JOIN aeroporto aeroporto_origem ON voo.origem = aeroporto_origem.id_aeroporto
+            JOIN aeroporto aeroporto_destino ON voo.destino = aeroporto_destino.id_aeroporto
             WHERE id_voo = ?
         ''', (id_voo,))
         
@@ -103,25 +103,18 @@ def visualizar_voo():
     elif opcao_visualizar == '2':
     
         cursor.execute('''
-            SELECT v.id_voo, 
-                   a_origem.nome_aeroporto AS origem, 
-                   a_destino.nome_aeroporto AS destino,
-                   v_data_partida, 
-                   v_ata_chegada, 
-                   v_preco
-            FROM voo v
-            JOIN aeroporto a_origem ON v.origem = a_origem.id_aeroporto
-            JOIN aeroporto a_destino ON v.destino = a_destino.id_aeroporto
+            SELECT voo.id_voo, 
+                   aeroporto_origem.nome_aeroporto AS origem, 
+                   aeroporto_destino.nome_aeroporto AS destino,
+                   voo.data_partida, 
+                   voo.data_chegada, 
+                   voo.preco
+            FROM voo
+            JOIN aeroporto aeroporto_origem ON voo.origem = aeroporto_origem.id_aeroporto
+            JOIN aeroporto aeroporto_destino ON voo.destino = aeroporto_destino.id_aeroporto
         ''')
         
-        
-        
-        
-        
-        
-        
-        
-        
+
         resultados = cursor.fetchall()
             
         tabela = PrettyTable()
@@ -141,9 +134,12 @@ def visualizar_voo():
     else:
         input('Opção inválida. Pressione enter!')    
    
+   
+   
+   
 def visualizar_aeroporto():
         
-    db_path = Path("C:/Repositorios/Relaciomento_passagens_aereas/passagens_aereas_relacionamento/Banco_dados.db")
+    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
