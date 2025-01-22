@@ -6,16 +6,16 @@ from pathlib import Path
 
 def visualizar_cliente():
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    
     print('1 - Visualizar Cliente')
     print('2 - Visualizar todos os Clientes')
     opcao_visualizar = input('====> Escolha a opção: ')
     
-    if opcao_visualizar == '1':    
+    if opcao_visualizar == '1':  
+          
         id_cliente = input('Qual a identificação do Cliente que deseja visualizar? ')    
             
         cursor.execute('SELECT * FROM clientes WHERE id_cliente = ?', (id_cliente,))   # pORQUE ESSA VÍRGULA?
@@ -33,6 +33,7 @@ def visualizar_cliente():
         print(tabela)
         input('Pressione Enter')
         conn.close()
+        
     elif opcao_visualizar == '2':
         cursor.execute('SELECT * FROM clientes')
         resultados = cursor.fetchall()
@@ -48,8 +49,7 @@ def visualizar_cliente():
                 
         print(tabela)
         input('Pressione Enter')
-        conn.close()
-        
+        conn.close()    
         
     else:
         input('Opção inválida. Pressione enter!')    
@@ -57,11 +57,10 @@ def visualizar_cliente():
    
 def visualizar_voo():
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
-    conn = sqlite3.connect(db_path)
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db") # Definindo o caminho
+    conn = sqlite3.connect(db_path)  # Conectando o BD
     cursor = conn.cursor()
 
-    
     print('1 - Visualizar Voo')
     print('2 - Visualizar todos os Voos')
     opcao_visualizar = input('====> Escolha a opção: ')
@@ -82,19 +81,17 @@ def visualizar_voo():
             WHERE id_voo = ?
         ''', (id_voo,))
         
-        
-        
-        
+        # Variável para armazenar consulta
         resultados = cursor.fetchall()
             
         tabela = PrettyTable()
             
-        colunas = [descricao [0] for descricao in cursor.description]
+        colunas = [descricao [0] for descricao in cursor.description] # description: retorna o nome das colunas
             
         tabela.field_names = colunas
             
         for row in resultados:
-            tabela.add_row(row)
+            tabela.add_row(row) # Adiciona linha de resultado à tabela
                 
         print(tabela)
         input('Pressione Enter')
@@ -114,7 +111,6 @@ def visualizar_voo():
             JOIN aeroporto aeroporto_destino ON voo.destino = aeroporto_destino.id_aeroporto
         ''')
         
-
         resultados = cursor.fetchall()
             
         tabela = PrettyTable()
@@ -130,16 +126,13 @@ def visualizar_voo():
         input('Pressione Enter')
         conn.close()
         
-        
     else:
         input('Opção inválida. Pressione enter!')    
    
    
-   
-   
 def visualizar_aeroporto():
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 

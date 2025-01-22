@@ -6,11 +6,10 @@ from pathlib import Path
 
 def remover_cliente(): 
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-
-        
+   
     id_cliente = input('Qual a identificação do Cliente a ser REMOVIDO?: ')
         
     cursor.execute('SELECT nome FROM clientes WHERE id_cliente = ?', (id_cliente))
@@ -32,7 +31,7 @@ def remover_cliente():
 
 def remover_voo(): 
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -58,7 +57,7 @@ def remover_voo():
             
 def remover_aeroporto(): 
         
-    db_path = Path("C:\Repositorios\passagens_aereas_relacionamento\Banco_dados.db")
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
