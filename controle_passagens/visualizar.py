@@ -245,7 +245,6 @@ def visualizar_venda():
             JOIN voo ON venda_passagens.id_voo = voo.id_voo
             JOIN aeroporto aeroporto_origem ON voo.origem = aeroporto_origem.id_aeroporto
             JOIN aeroporto aeroporto_destino ON voo.destino = aeroporto_destino.id_aeroporto
-            WHERE venda_passagens.id_venda = ?
         ''')
         
         resultados = cursor.fetchall()

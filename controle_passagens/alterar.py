@@ -142,3 +142,57 @@ def alterar_aeroporto():
         input(f'Aeroporto com ID {id_aeroporto} não encontardo. Pressione enter!')
         
 
+def alterar_venda(): 
+        
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+        
+    id_venda = input('Qual a identificação da Venda a ser ALTERADA?: ')
+    
+    cursor.execute('SELECT * FROM aeroporto')
+    resultado = cursor.fetchall()
+    
+    if not resultado:
+        print('Nenhum Aeroporto encontrado. Cadastre Aeroportos primeiro.')
+        # conn.close()
+        return
+    
+    tabela = PrettyTable(['id_aeroporto', 'nome_aeroporto', 'codigo_iata', 'cidade', 'pais'])
+    for linha in resultado:
+        tabela.add_row(linha)
+    print(tabela)    
+    
+    cursor.execute('SELECT id_voo FROM voo WHERE id_voo = ?', (id_venda))
+    voo = cursor.fetchone()
+        
+    if voo:
+        print()
+        origem = voo[0]
+        opcao_alterar = input(f'Deseja realmente alterar este voo ?: (1 - Sim/ 2 - Não): ')
+        
+        if opcao_alterar == '1':
+            nova_origem = input('Origem: ')
+            novo_destino = input('Destino:')
+            nova_data_partida = input('Data de partida: ')
+            nova_data_chegada = input('Data de chegada: ')
+            novo_preco = input('Preco: ')
+            
+        
+            dados_voo = (nova_origem, novo_destino, nova_data_partida, nova_data_chegada, novo_preco, id_voo)
+        
+            cursor.execute('UPDATE voo SET origem = ?, destino = ?, data_partida = ?, data_chegada = ?, preco = ? WHERE id_voo = ?',
+                (dados_voo))
+        
+            conn.commit()
+            print()
+            input('Deseja continuar alterando voos? Pressione enter!')
+            conn.close()    
+        elif opcao_alterar == '2':
+            input('Voo NÃO atualizado. Pressione enter!')
+        else:
+            input('Opção inválida!')
+        
+    else:
+        input(f'Voo com ID {id_voo} não encontardo. Pressione enter!')
