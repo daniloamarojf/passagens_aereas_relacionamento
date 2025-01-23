@@ -3,10 +3,10 @@ import os
 from prettytable import PrettyTable
 from controle_passagens.tabelas import criar_clientes, criar_aeroporto, criar_voo
 from controle_passagens.funcoes import cabecalho, crud, crud_tabelas
-from controle_passagens.adicionar import adicionar_cliente, adicionar_aeroporto, adicionar_voo
+from controle_passagens.adicionar import adicionar_cliente, adicionar_aeroporto, adicionar_voo, adicionar_venda
 from controle_passagens.alterar import alterar_cliente, alterar_voo, alterar_aeroporto
 from controle_passagens.remover import remover_cliente, remover_voo, remover_aeroporto
-from controle_passagens.visualizar import visualizar_cliente, visualizar_voo, visualizar_aeroporto
+from controle_passagens.visualizar import visualizar_cliente, visualizar_voo, visualizar_aeroporto, visualizar_venda
 
 criar_clientes()
 criar_aeroporto()
@@ -82,6 +82,28 @@ while True:
         elif opcao == '4':
             cabecalho('VISUALIZAR VOO')
             visualizar_voo()
+        else:
+            input('Opção inválida! Pressione enter.') 
+            
+    elif opcao_tabelas == '4':    
+        os.system('cls')
+        cabecalho('VENDA DE PASSAGENS')
+        crud()
+        opcao = input('=====> Escolha a opção: ')
+        
+        
+        if opcao == '1':
+            cabecalho('ADICIONAR VENDA DE PASSAGEM')
+            adicionar_venda()
+        elif opcao == '2':
+            cabecalho('ALTERAR VENDA DE PASSAGEM')
+            alterar_voo()
+        elif opcao == '3':
+            cabecalho('REMOVER VENDA DE PASSAGEM')
+            remover_voo()
+        elif opcao == '4':
+            cabecalho('VISUALIZAR VISUALIZAR VENDA DE PASSAGENS')
+            visualizar_venda()
         else:
             input('Opção inválida! Pressione enter.') 
 

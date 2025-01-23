@@ -81,3 +81,53 @@ def adicionar_voo():
     conn.commit()
     print('Voo adicionado com sucesso!')
     conn.close()
+
+def adicionar_venda(): 
+        
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    data_venda = input('Data da venda: ')
+     
+    cursor.execute('SELECT * FROM clientes')
+    resultado = cursor.fetchall()
+    
+    if not resultado:
+        print('Nenhum Cliente  encontrado. Cadastre Cliente primeiro.')
+        # conn.close()
+        return
+    
+    tabela = PrettyTable(['id_cliente', 'nome', 'cpf', 'telefone', 'data_nascimento'])
+    for linha in resultado:
+        tabela.add_row(linha)
+    print(tabela)
+    
+    
+    id_cliente = int(input('Digite o ID do cliente: '))
+    
+    cursor.execute('SELECT * FROM voo')
+    resultado = cursor.fetchall()
+    
+    if not resultado:
+        print('Nenhum Voo encontrado. Cadastre Voo primeiro.')
+        # conn.close()
+        return
+    
+    tabela = PrettyTable(['id_voo', 'origem', 'destino', 'data_partida', 'data_chegada','preco'])
+    for linha in resultado:
+        tabela.add_row(linha)
+    print(tabela)
+    
+    id_voo = int(input('Digite o ID do Voo: '))
+    assento = input('Numero do assento: ')
+    status = input('Status da venda: ')
+    
+    
+    dados_venda = (data_venda, id_cliente, id_voo, assento, status)
+    
+    cursor.execute('INSERT INTO venda_passagens (data_venda, id_cliente, id_voo, assento, status) VALUES (?, ?, ?, ?, ?)', dados_venda)
+    conn.commit()
+    print('Venda adicionado com sucesso!')
+    conn.close()
+

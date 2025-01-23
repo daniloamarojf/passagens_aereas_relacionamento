@@ -18,4 +18,5 @@ def crud_tabelas():
     print('::::  ADMINISTRAÇÃO DE TABELAS  ::::\n')
     print('1 - Cliente')
     print('2 - Aeroporto')
-    print('3 - Voo\n')
+    print('3 - Voo')
+    print('4 - Venda de passagens\n')
