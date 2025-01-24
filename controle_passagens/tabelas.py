@@ -83,4 +83,3 @@ def criar_venda_passagens():
     conn.commit()
     conn.close()
     
-criar_venda_passagens()
