@@ -147,37 +147,8 @@ def alterar_aeroporto():
 
     
     
-    id_cliente = int(input('Digite o ID do cliente: '))
-    
-    cursor.execute('SELECT * FROM voo')
-    resultado = cursor.fetchall()
-    
-    if not resultado:
-        print('Nenhum Voo encontrado. Cadastre Voo primeiro.')
-        # conn.close()
-        return
-    
-    tabela = PrettyTable(['id_voo', 'origem', 'destino', 'data_partida', 'data_chegada','preco'])
-    for linha in resultado:
-        tabela.add_row(linha)
-    print(tabela)
-    
-    id_voo = int(input('Digite o ID do Voo: '))
-    assento = input('Numero do assento: ')
-    status = input('Status da venda: ')
-    
-    
-    dados_venda = (data_venda, id_cliente, id_voo, assento, status)
-    
-    cursor.execute('INSERT INTO venda_passagens (data_venda, id_cliente, id_voo, assento, status) VALUES (?, ?, ?, ?, ?)', dados_venda)
-    conn.commit()
-    print('Venda adicionado com sucesso!')
-    conn.close()
-
                 
         
-
-
 
 
         
@@ -191,20 +162,8 @@ def alterar_venda():
         
     id_venda = input('Qual a identificação da Venda a ser ALTERADA?: ')
     
-    cursor.execute('SELECT * FROM clientes')
-    resultado = cursor.fetchall()
-    
-    if not resultado:
-        print('Nenhum Cliente  encontrado. Cadastre Cliente primeiro.')
-        # conn.close()
-        return
-    
-    tabela = PrettyTable(['id_cliente', 'nome', 'cpf', 'telefone', 'data_nascimento'])
-    for linha in resultado:
-        tabela.add_row(linha)
-    print(tabela)   
-    
-    cursor.execute('SELECT id_venda FROM venda WHERE id_venda = ?', (id_venda))
+        
+    cursor.execute('SELECT id_venda FROM venda_passagens WHERE id_venda = ?', (id_venda))
     venda = cursor.fetchone()
         
     if venda:
@@ -231,8 +190,8 @@ def alterar_venda():
             
             
             
-            novo_id_cliente = input('Origem: ')
-            
+            novo_id_cliente = input('ID do cliente: ')
+            nova_data_venda = input('Data da venda: ')
             cursor.execute('SELECT * FROM voo')
             resultado = cursor.fetchall()
     
@@ -251,9 +210,9 @@ def alterar_venda():
             status = input('Status da venda: ')
             
         
-            dados_venda = (novo_id_cliente, novo_id_voo, assento, status)
+            dados_venda = (nova_data_venda, novo_id_cliente, novo_id_voo, assento, status, id_venda)
         
-            cursor.execute('UPDATE venda SET id_cliente = ?, id_voo = ?, assento = ?, status = ? WHERE id_venda = ?',
+            cursor.execute('UPDATE venda_passagens SET data_venda = ?, id_cliente = ?, id_voo = ?, assento = ?, status = ? WHERE id_venda = ?',
                 (dados_venda))
         
             conn.commit()
@@ -266,4 +225,4 @@ def alterar_venda():
             input('Opção inválida!')
         
     else:
-        input(f'Voo com ID {id_voo} não encontardo. Pressione enter!')
+        input(f'Voo com ID {id_venda} não encontardo. Pressione enter!')

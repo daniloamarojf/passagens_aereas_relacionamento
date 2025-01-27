@@ -81,3 +81,28 @@ def remover_aeroporto():
         else:
             input('Aeroporto NÃO removido. Pressione enter!')
 
+def remover_venda(): 
+        
+    db_path = Path("C:\Repositorios\Relaciomento_passagens_aereas\passagens_aereas_relacionamento\Banco_dados.db")
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+        
+    id_venda = input('Qual a identificação da Venda a ser REMOVIDA?: ')
+        
+    cursor.execute('SELECT id_cliente FROM venda_passagens WHERE id_venda = ?', (id_venda))
+    venda = cursor.fetchone()
+        
+    if venda:
+        print()
+        nome2 = venda[0]
+        opcao_excluir = input(f'Deseja realmente excluir o cliente: {nome2} ? (1 - Sim/ 2 - Não) ')
+            
+        if opcao_excluir == '1':
+            cursor.execute('DELETE FROM venda_passagens WHERE id_venda = ?', (id_venda))
+            conn.commit() 
+            print()
+            input('Venda removida com sucesso. Pressione enter!')
+            conn.close()    
+        else:
+            input('Venda NÃO removida. Pressione enter!')
